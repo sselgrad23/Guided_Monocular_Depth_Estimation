@@ -1,0 +1,5 @@
+When running/training the naive version, make sure that on lines 79, 186, and 451, that they all have "conditioning_channels: int = 3,".
+
+When running/training the naive version, make sure that on lines 79, 186, and 451, that they all have "conditioning_channels: int = 9,".
+
+The code will not work otherwise as you will have too many or too few ControlNet conditioning channels.
