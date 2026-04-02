@@ -1,0 +1,21 @@
+#!/bin/bash
+#SAMPLES=(0 500 1000 5000 10000)
+SAMPLES=(20000 40000 160000 320000) #80000
+CKPTS=(20000) #(20000 50000)
+SCALES=(1.0)
+
+for N in "${SAMPLES[@]}"; do
+  for CHECKPOINT in "${CKPTS[@]}"; do
+    for SCALE in "${SCALES[@]}"; do
+      echo "Submitting KITTI: N=$N, CHECKPOINT=$CHECKPOINT, SCALE=$SCALE"
+      sbatch --gpus=1 \
+           --time=2:00:00 \
+           --mem-per-cpu=12G \
+           --job-name=KITTI_N${N}_C${CHECKPOINT}_S${SCALE} \
+           --wrap="bash experiment_kitti.sh $N $CHECKPOINT $SCALE"
+    done
+  done
+done
+
+# --gpus=rtx_3090:1 \
+#_C${CHECKPOINT} \
